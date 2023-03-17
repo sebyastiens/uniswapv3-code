@@ -22,7 +22,7 @@ library Math {
                 (uint256(liquidity) << FixedPoint96.RESOLUTION),
                 (sqrtPriceBX96 - sqrtPriceAX96),
                 sqrtPriceBX96
-            )*(10**5),
+            ),
             sqrtPriceAX96
         );
     }
@@ -38,7 +38,7 @@ library Math {
             (sqrtPriceAX96, sqrtPriceBX96) = (sqrtPriceBX96, sqrtPriceAX96);
 
         amount1 = mulDivRoundingUp(
-            liquidity*(10**5),
+            liquidity,
             (sqrtPriceBX96 - sqrtPriceAX96),
             FixedPoint96.Q96
         );
@@ -69,10 +69,10 @@ library Math {
         uint256 amountIn
     ) internal pure returns (uint160) {
         uint256 numerator = uint256(liquidity) << FixedPoint96.RESOLUTION;
-        uint256 product = amountIn * sqrtPriceX96/ (10**5);
+        uint256 product = amountIn * sqrtPriceX96;
 
         // If product doesn't overflow, use the precise formula.
-        if (product *(10**5) / amountIn == sqrtPriceX96) {
+        if (product / amountIn == sqrtPriceX96) {
             uint256 denominator = numerator + product;
             if (denominator >= numerator) {
                 return
@@ -85,7 +85,7 @@ library Math {
         // If product overflows, use a less precise formula.
         return
             uint160(
-                divRoundingUp(numerator*(10**5), (numerator*(10**5) / sqrtPriceX96) + amountIn)
+                divRoundingUp(numerator, (numerator / sqrtPriceX96) + amountIn)
             );
     }
 
@@ -96,7 +96,7 @@ library Math {
     ) internal pure returns (uint160) {
         return
             sqrtPriceX96 +
-            uint160((amountIn << FixedPoint96.RESOLUTION) / liquidity*(10**5));
+            uint160((amountIn << FixedPoint96.RESOLUTION) / liquidity);
     }
 
     function mulDivRoundingUp(
