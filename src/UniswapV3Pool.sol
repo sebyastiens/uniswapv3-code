@@ -15,6 +15,6 @@ import "./lib/Tick.sol";
 import "./lib/TickBitmap.sol";
 import "./lib/TickMath.sol";
 
-contract UniswapV3Pool is IUniswapV3Pool {
+abstract contract UniswapV3Pool is IUniswapV3Pool {
    
 }
