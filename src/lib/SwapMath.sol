@@ -31,14 +31,12 @@ library SwapMath {
             ? Math.calcAmount0Delta(
                 sqrtPriceCurrentX96,
                 sqrtPriceTargetX96,
-                liquidity,
-                true
+                liquidity
             )
             : Math.calcAmount1Delta(
                 sqrtPriceCurrentX96,
                 sqrtPriceTargetX96,
-                liquidity,
-                true
+                liquidity
             );
 
         if (amountRemainingLessFee >= amountIn)
@@ -59,14 +57,12 @@ library SwapMath {
                 : Math.calcAmount0Delta(
                     sqrtPriceCurrentX96,
                     sqrtPriceNextX96,
-                    liquidity,
-                    true
+                    liquidity
                 );
             amountOut = Math.calcAmount1Delta(
                 sqrtPriceCurrentX96,
                 sqrtPriceNextX96,
-                liquidity,
-                false
+                liquidity
             );
         } else {
             amountIn = max
@@ -74,14 +70,12 @@ library SwapMath {
                 : Math.calcAmount1Delta(
                     sqrtPriceCurrentX96,
                     sqrtPriceNextX96,
-                    liquidity,
-                    true
+                    liquidity
                 );
             amountOut = Math.calcAmount0Delta(
                 sqrtPriceCurrentX96,
                 sqrtPriceNextX96,
-                liquidity,
-                false
+                liquidity
             );
         }
 
